@@ -4,7 +4,7 @@ This is an app that calculates the Modulo Three using finite state machine.
 
 ## Getting Started
 
-To get started:
+To get started, make sure you are on the latest version of pnpm (e.g. 8.5.1) or npm (e.g. 9.6.)
 
 ```bash
 pnpm install

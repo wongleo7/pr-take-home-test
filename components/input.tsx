@@ -1,5 +1,5 @@
 type InputProps = {
-  value: string;
+  value?: string;
   label: string;
   isError: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

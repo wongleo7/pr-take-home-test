@@ -1,12 +1,6 @@
-import finiteAutomation from "./finite-automation";
-
-type ModThreeStates = 0 | 1 | 2;
-type ModThreeAlphabet = 0 | 1;
-
-type ModThreeTransitionProps = {
-  initialState: ModThreeStates;
-  input: ModThreeAlphabet;
-};
+"use server";
+import { ModThreeStates, ModThreeAlphabet } from '@/types/mod-three';
+import { finiteAutomation } from "./finite-automation";
 
 // This function is the transition function for a finite automaton that accepts
 // binary strings.
@@ -39,11 +33,6 @@ function modThreeTransition(
   }
 }
 
-function validateBinaryString(input: string): boolean {
-  const binaryRegex = /^[0-1]{1,}$/;
-  return binaryRegex.test(input);
-}
-
 function parseBinaryString(input: string): ModThreeAlphabet[] {
   let result: ModThreeAlphabet[] = [];
   for (let i = 0; i < input.length; i++) {
@@ -59,25 +48,11 @@ function parseBinaryString(input: string): ModThreeAlphabet[] {
   return result;
 }
 
-function modThree(input: string): number {
+export async function modThreeFA(input: string): Promise<ModThreeStates> {
   let binaryInputArray = parseBinaryString(input);
   let currentState: ModThreeStates = 0;
   try {
-    for (let i = 0; i < input.length; i++) {
-      currentState = modThreeTransition(currentState, binaryInputArray[i]);
-    }
-    return currentState;
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-}
-
-function modThreeFA(input: string): ModThreeStates {
-  let binaryInputArray = parseBinaryString(input);
-  let currentState: ModThreeStates = 0;
-  try {
-    return finiteAutomation<ModThreeStates, ModThreeAlphabet>({
+    return await finiteAutomation<ModThreeStates, ModThreeAlphabet>({
       inputAlphabet: binaryInputArray,
       initialState: currentState,
       transitionFunction: modThreeTransition,
@@ -87,6 +62,3 @@ function modThreeFA(input: string): ModThreeStates {
     throw e;
   }
 }
-
-export type { ModThreeAlphabet, ModThreeStates, ModThreeTransitionProps };
-export { validateBinaryString, modThreeFA, modThree };

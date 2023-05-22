@@ -1,8 +1,8 @@
-type ButtonProps = {
+type SubmitButtonProps = {
   label: string;
 };
 
-export default function Button({ label }: ButtonProps) {
+export default function SubmitButton({ label }: SubmitButtonProps) {
   return (
     <div className="flex items-center justify-center mt-3">
       <button
