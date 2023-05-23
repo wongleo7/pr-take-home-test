@@ -13,8 +13,16 @@ pnpm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project is bootstrapped with Nextjs, styled with Tailwind.
+This project is bootstrapped with Nextjs 13, styled with Tailwind.
+
+## Github
+
+https://github.com/wongleo7/pr-take-home-test
 
 ## Deploy
 
 App is automatically deployed to vercel at: https://pr-take-home-test.vercel.app/
+
+## Testing
+
+Unit tests and E2E testing is powered by Cypress: https://cloud.cypress.io/projects/6bh7vx/

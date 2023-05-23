@@ -28,7 +28,7 @@ export default function RootLayout({
             <h1 className="text-sm font-bold text-center ">github repo</h1>
           </a>
         </div>
-        <div className="w-full flex justify-end pr-5 text-sm">by Leo</div>
+        <div className="w-full flex justify-end pr-5 text-sm">by wongleo7</div>
         {children}
       </body>
     </html>
