@@ -26,3 +26,19 @@ App is automatically deployed to vercel at: https://pr-take-home-test.vercel.app
 ## Testing
 
 Unit tests and E2E testing is powered by Cypress: https://cloud.cypress.io/projects/6bh7vx/
+
+To run tests, make sure you have all dependencies set up for cypress: https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies
+
+Then run:
+
+```bash
+pnpm run test
+```
+
+Or to run the component tests:
+
+```bash
+pnpm run test --component
+```
+
+note: on windows WSL, there is a problem with cypress running gpu acceleration: https://github.com/cypress-io/cypress/issues/25357
