@@ -1,11 +1,12 @@
 import React from "react";
-import Input from "./input";
+import NumberInput from "./number-input";
 
-describe("<Input />", () => {
+describe("<NumberInput />", () => {
   it("renders", () => {
     // see: https://on.cypress.io/mounting-react
     cy.mount(
-      <Input
+      <NumberInput
+        name={"test"}
         label={"test label"}
         isError={undefined}
         onChange={function (e: React.ChangeEvent<HTMLInputElement>): void {

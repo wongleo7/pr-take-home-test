@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
-import Input from "./input";
+import NumberInput from "./number-input";
 import SubmitButton from "./submit-button";
 import type { ModThreeAlphabet, ModThreeStates } from "@/types/mod-three";
 import type { StateHistory } from "@/types/state-history";
@@ -22,7 +22,7 @@ export default function ModuloThreeForm() {
 
     const validation = validateBinaryString(binaryNumber);
     if (validation !== true) {
-      setIsError(`invalid input:${binaryNumber}:${validation}`);
+      setIsError(`invalid input:${binaryNumber}`);
       return;
     }
     const { finalState, history } = await modThreeWithHistory(binaryNumber);
@@ -36,19 +36,20 @@ export default function ModuloThreeForm() {
   const validateAndSaveInput = (input: string) => {
     const validation = validateBinaryString(input);
     if (validation !== true) {
-      setIsError(`invalid input:${input}:${validation}`);
+      setIsError(`invalid input:${input}`);
       return;
     } else {
       setIsError(undefined);
     }
-    setBinaryNumber(input);
+    setBinaryNumber(input || "");
   };
 
   const onChangeDecimalInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-    const inputInBinary = parseInt(input, 10).toString(2);
+    const inputInBinary = input && parseInt(input, 10).toString(2);
     validateAndSaveInput(inputInBinary);
   };
+
   const onChangeBinaryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     validateAndSaveInput(input);
@@ -57,13 +58,15 @@ export default function ModuloThreeForm() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <Input
+        <NumberInput
+          name="decimal-input"
           value={parseInt(binaryNumber, 2).toString()}
           label="Base 10 Number"
           isError={isError}
           onChange={onChangeDecimalInput}
         />
-        <Input
+        <NumberInput
+          name="binary-input"
           value={binaryNumber}
           label="Binary Number"
           isError={isError}

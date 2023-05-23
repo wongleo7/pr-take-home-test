@@ -15,10 +15,18 @@ export default function ModThreeResult({ result }: ResultProps) {
     <div className="flex flex-col items-center justify-center mt-3">
       <h3>
         <span>Result:</span>
-        <span>{`${result.binaryNumber} mod 11 = (decimal) ${result.remainder}`}</span>
+        <span id="calculation">
+          {`${result?.binaryNumber || "0"} mod 11 = (decimal)`}{" "}
+        </span>
+        <span id="remainder" className="font-bold">
+          {result.remainder}
+        </span>
       </h3>
       {result.history && (
-        <div className="flex flex-col items-center justify-center mt-3">
+        <div
+          id="history-table"
+          className="flex flex-col items-center justify-center mt-3"
+        >
           <h3>History</h3>
           <div className="grid mt-3 grid-cols-3 w-[12rem]">
             <div className="table-cell font-bold border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
