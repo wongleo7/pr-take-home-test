@@ -1,19 +1,20 @@
 'use client';
 import { FormEvent, useState } from "react";
 import Input from "./input";
-import Result from "./mod-three-result";
 import SubmitButton from './submit-button';
-import type { ModThreeStates } from '@/types/mod-three';
+import type { ModThreeAlphabet, ModThreeStates } from '@/types/mod-three';
+import type { StateHistory } from '@/types/state-history';
 import validateBinaryString from '@/utils/validate-binary-string';
 import { modThreeFA } from '@/server-utils/mod-three';
+import ModThreeResult from './mod-three-result';
 
-type ModuloThreeFormProps = {
-};
-
-export default function ModuloThreeForm({
-}: ModuloThreeFormProps) {
+export default function ModuloThreeForm() {
   const [binaryNumber, setBinaryNumber] = useState<string>("");
-  const [result, setResult] = useState<{ remainder: ModThreeStates, binaryNumber: string }>();
+  const [result, setResult] = useState<{
+    remainder: ModThreeStates,
+    binaryNumber: string,
+    history: StateHistory<ModThreeStates, ModThreeAlphabet>
+  }>();
   const [isError, setIsError] = useState<string>();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,10 +25,11 @@ export default function ModuloThreeForm({
       setIsError(`invalid input:${binaryNumber}:${validation}`);
       return;
     }
-    const remainder = await modThreeFA(binaryNumber);
+    const { finalState, history } = await modThreeFA(binaryNumber);
     setResult({
       binaryNumber,
-      remainder
+      remainder: finalState,
+      history
     });
   };
 
@@ -69,7 +71,7 @@ export default function ModuloThreeForm({
         />
         <SubmitButton label="Calculate" />
       </form>
-      {result != null && <Result result={result}/>}
+      {result != null && <ModThreeResult result={result} />}
     </>
   );
 }
