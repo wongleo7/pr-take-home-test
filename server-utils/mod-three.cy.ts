@@ -4,20 +4,41 @@ describe("Regular modThree", () => {
   it("base case", async () => {
     expect(await modThree("")).to.eq(0);
   });
-  it("0", async () => {
+  it("is 0 and results in 0", async () => {
     expect(await modThree("0")).to.eq(0);
   });
-  it("pdf example 1", async () => {
+  it("results in 1", async () => {
     expect(await modThree("1101")).to.eq(1);
   });
-  it("pdf example 2", async () => {
+  it("results in 2", async () => {
     expect(await modThree("1110")).to.eq(2);
   });
-  it("pdf example 3", async () => {
+  it("results in 0", async () => {
     expect(await modThree("1111")).to.eq(0);
   });
   it("long binary string", async () => {
     expect(await modThree("11111111111111111111111")).to.eq(1);
+  });
+  it("is invalid string: nonbinary", async () => {
+    expect(await modThree("1234")).to.eq(1);
+  });
+  it("is invalid string: alpha", async () => {
+    expect(await modThree("abcd")).to.eq(new Error("Unexpected input"));
+  });
+  it("is invalid string: mixed alphabinary", async () => {
+    expect(await modThree("1001a")).to.eq(new Error("Unexpected input"));
+  });
+  it("is invalid string: mixed alphanumeric", async () => {
+    expect(await modThree("1001a")).to.eq(new Error("Unexpected input"));
+  });
+  it("is invalid string: special chars", async () => {
+    expect(await modThree("101.2")).to.eq(new Error("Unexpected input"));
+  });
+  it("is invalid string: special chars", async () => {
+    expect(await modThree("101.2")).to.eq(new Error("Unexpected input"));
+  });
+  it("is invalid string: negative", async () => {
+    expect(await modThree("-101")).to.eq(new Error("Unexpected input"));
   });
 });
 
