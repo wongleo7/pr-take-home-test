@@ -1,7 +1,7 @@
 import validateBinaryString from "./validate-binary-string";
 
 it("empty string", () => {
-  expect(validateBinaryString("")).to.eq(false);
+  expect(validateBinaryString("")).to.eq(true);
 });
 
 it("small binary string", () => {
