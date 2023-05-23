@@ -68,7 +68,7 @@ export async function modThree(input: string): Promise<ModThreeStates> {
   }
 }
 
-// Mod Three with Finite Automation
+// Mod Three with Finite Automation and History
 export async function modThreeWithHistory(input: string): Promise<{
   finalState: ModThreeStates;
   history: StateHistory<ModThreeStates, ModThreeAlphabet>;

@@ -3,10 +3,8 @@
 import { StateHistory } from "@/types/state-history";
 
 type FiniteAutomationProps<S, A> = {
-  // setOfStates: S[];
   inputAlphabet: A[];
   initialState: S;
-  // finalStates: S[];
   transitionFunction: (state: S, alphabet: A) => S;
 };
 
