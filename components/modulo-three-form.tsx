@@ -10,6 +10,7 @@ import ModThreeResult from "./mod-three-result";
 
 export default function ModuloThreeForm() {
   const [binaryNumber, setBinaryNumber] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [result, setResult] = useState<{
     remainder: ModThreeStates;
     binaryNumber: string;
@@ -18,19 +19,23 @@ export default function ModuloThreeForm() {
   const [isError, setIsError] = useState<string>();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const validation = validateBinaryString(binaryNumber);
-    if (validation !== true) {
-      setIsError(`invalid input:${binaryNumber}`);
-      return;
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const validation = validateBinaryString(binaryNumber);
+      if (validation !== true) {
+        setIsError(`invalid input:${binaryNumber}`);
+        return;
+      }
+      const { finalState, history } = await modThreeWithHistory(binaryNumber);
+      setResult({
+        binaryNumber,
+        remainder: finalState,
+        history,
+      });
+    } finally {
+      setLoading(false);
     }
-    const { finalState, history } = await modThreeWithHistory(binaryNumber);
-    setResult({
-      binaryNumber,
-      remainder: finalState,
-      history,
-    });
   };
 
   const validateAndSaveInput = (input: string) => {
@@ -72,7 +77,7 @@ export default function ModuloThreeForm() {
           isError={isError}
           onChange={onChangeBinaryInput}
         />
-        <SubmitButton label="Calculate" />
+        <SubmitButton label="Calculate" disabled={loading} />
       </form>
       {result != null && <ModThreeResult result={result} />}
     </>
