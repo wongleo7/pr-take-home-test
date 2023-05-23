@@ -1,6 +1,6 @@
-'use server';
+"use server";
 
-import { StateHistory } from '@/types/state-history';
+import { StateHistory } from "@/types/state-history";
 
 type FiniteAutomationProps<S, A> = {
   // setOfStates: S[];
@@ -26,18 +26,21 @@ async function finiteAutomationWithHistory<S, A>({
   inputAlphabet,
   initialState,
   transitionFunction,
-}: FiniteAutomationProps<S, A>): Promise<{ finalState: S, history: StateHistory<S, A> }> {
+}: FiniteAutomationProps<S, A>): Promise<{
+  finalState: S;
+  history: StateHistory<S, A>;
+}> {
   let currentState = initialState;
-  let history: { state: S, input: A }[] = [{state: initialState, input: inputAlphabet[0]}];
+  let history: { state: S; input: A }[] = [];
 
   for (let i = 0; i < inputAlphabet.length; i++) {
     currentState = transitionFunction(currentState, inputAlphabet[i]);
-    history.push({state: currentState, input: inputAlphabet[i]});
+    history.push({ state: currentState, input: inputAlphabet[i] });
   }
   return {
     finalState: currentState,
-    history: history
+    history: history,
   };
 }
 
-export {finiteAutomation, finiteAutomationWithHistory};
+export { finiteAutomation, finiteAutomationWithHistory };

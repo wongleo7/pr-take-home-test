@@ -1,7 +1,7 @@
 "use server";
-import { ModThreeStates, ModThreeAlphabet } from '@/types/mod-three';
-import { finiteAutomation, finiteAutomationWithHistory } from "./finite-automation";
-import { StateHistory } from '@/types/state-history';
+import { ModThreeStates, ModThreeAlphabet } from "@/types/mod-three";
+import { finiteAutomationWithHistory } from "./finite-automation";
+import { StateHistory } from "@/types/state-history";
 
 // This function is the transition function for a finite automaton that accepts
 // binary strings.
@@ -50,8 +50,8 @@ function parseBinaryString(input: string): ModThreeAlphabet[] {
 }
 
 export async function modThreeFA(input: string): Promise<{
-  finalState: ModThreeStates,
-  history: StateHistory<ModThreeStates, ModThreeAlphabet>
+  finalState: ModThreeStates;
+  history: StateHistory<ModThreeStates, ModThreeAlphabet>;
 }> {
   let binaryInputArray = parseBinaryString(input);
   let currentState: ModThreeStates = 0;

@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { BsGithub } from "react-icons/bs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="w-full flex justify-end pr-5 mt-3">
+          <a
+            className="flex justify-center"
+            href="https://github.com/wongleo7/pr-take-home-test"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsGithub className="text-2xl mr-1" />
+            <h1 className="text-sm font-bold text-center ">github repo</h1>
+          </a>
+        </div>
+        <div className="w-full flex justify-end pr-5 text-sm">by Leo</div>
+        {children}
+      </body>
     </html>
   );
 }
