@@ -1,6 +1,9 @@
 "use server";
 import { ModThreeStates, ModThreeAlphabet } from "@/types/mod-three";
-import { finiteAutomationWithHistory } from "./finite-automation";
+import {
+  finiteAutomation,
+  finiteAutomationWithHistory,
+} from "./finite-automation";
 import { StateHistory } from "@/types/state-history";
 
 // This function is the transition function for a finite automaton that accepts
@@ -49,7 +52,24 @@ function parseBinaryString(input: string): ModThreeAlphabet[] {
   return result;
 }
 
-export async function modThreeFA(input: string): Promise<{
+// Mod Three with Finite Automation
+export async function modThree(input: string): Promise<ModThreeStates> {
+  let binaryInputArray = parseBinaryString(input);
+  let currentState: ModThreeStates = 0;
+  try {
+    return finiteAutomation<ModThreeStates, ModThreeAlphabet>({
+      inputAlphabet: binaryInputArray,
+      initialState: currentState,
+      transitionFunction: modThreeTransition,
+    });
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+
+// Mod Three with Finite Automation
+export async function modThreeWithHistory(input: string): Promise<{
   finalState: ModThreeStates;
   history: StateHistory<ModThreeStates, ModThreeAlphabet>;
 }> {
