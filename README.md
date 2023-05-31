@@ -1,6 +1,6 @@
 ## Intro
 
-This is an app that calculates the Modulo Three using finite state machine.
+This is an app that calculates the Modulo Three using finite state machine. [problem.pdf](/problem.pdf)
 
 ## Getting Started
 
